@@ -5,6 +5,21 @@
   text-align: center;
 }
 
+body {
+  font-size: .9rem;
+  background: rgb(25, 25, 25);
+  background: -moz-linear-gradient(90deg, rgba(25, 25, 25, 1) 0%, rgba(6, 25, 10, 1) 35%, rgba(32, 32, 32, 1) 100%);
+  background: -webkit-linear-gradient(90deg, rgba(25, 25, 25, 1) 0%, rgba(6, 25, 10, 1) 35%, rgba(32, 32, 32, 1) 100%);
+  background: linear-gradient(90deg, rgba(25, 25, 25, 1) 0%, rgba(6, 25, 10, 1) 35%, rgba(32, 32, 32, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#191919", endColorstr="#202020", GradientType=1);
+}
+
+.todo-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .wallet-balance-container {
   background-color: #000000;
   opacity: 0.8;
@@ -27,4 +42,59 @@
   display: flex;
   flex-direction: column;
   text-align: left;
+}
+
+.wallet-balance-title {
+  color: lime;
+  text-align: left;
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  background-color: #0f0f0f;
+  border-radius: .3rem;
+}
+
+.todo-form input {
+  padding: 0 15px;
+  flex-grow: 1;
+  border-radius: .5rem;
+  border: 1px solid #1a1a1a;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+}
+
+.todo-list li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: #333;
+  padding: 10px;
+  border-radius: .3rem;
+  box-shadow: 0 0 21px -7px #000;
+}
+
+.todo-list li span {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.todo-list li button,
+.todo-list li input {
+  flex-shrink: 0;
+}
+
+.todo-list li input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
 }

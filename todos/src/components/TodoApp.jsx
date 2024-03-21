@@ -29,9 +29,10 @@ export const TodoApp = () => {
   const [writeContract, setWriteContract] = useState();
   const [todos, setTodos] = useState([]);
 
-  // UseEffect =============================================
+  // ****************************************************************
+  // UseEffect
+  // ****************************************************************
   useEffect(() => {
-    // console.log(todos);
     const getProvider = async () => {
       // Make read contract - for just reading stuff on the blockchain
       const todoReadContract = new ethers.Contract(
@@ -50,20 +51,11 @@ export const TodoApp = () => {
       );
       setWriteContract(todoWriteContract);
 
-      updateAccountData();
+      updateDisplayAccountData();
     };
     getProvider();
   }, []);
 
-  const updateAccountData = async () => {
-    let accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts',
-    });
-
-    updateWallet(accounts);
-  };
-
-  // UseEffect 2 =============================================
   useEffect(() => {
     if (readContract) {
       (async () => {
@@ -72,7 +64,20 @@ export const TodoApp = () => {
     }
   }, [readContract]);
 
-  // Update Wallet =============================================
+  // ****************************************************************
+  // Update account display data
+  // ****************************************************************
+  const updateDisplayAccountData = async () => {
+    let accounts = await window.ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+
+    updateWallet(accounts);
+  };
+
+  // ****************************************************************
+  // Update Wallet
+  // ****************************************************************
   const updateWallet = async (accounts) => {
     const balance = formatBalance(
       await window.ethereum.request({
@@ -83,40 +88,53 @@ export const TodoApp = () => {
     setWallet({ accounts, balance });
   };
 
-  // Format Balance =============================================
+  // ****************************************************************
+  // Format Balance
+  // ****************************************************************
   const formatBalance = (rawBalance) => {
     const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(5);
     return balance;
   };
 
-  // Todo Form Handler =============================================
+  // ****************************************************************
+  // Todo Form Handler
+  // ****************************************************************
   const todoFormHandler = async (e) => {
     e.preventDefault();
-    if (await addTodo(writeContract, e.target[0].value)) {
-      setTodos(await getTodos(readContract));
-      updateAccountData();
+    if (e.target[0].value) {
+      if (await addTodo(writeContract, e.target[0].value)) {
+        setTodos(await getTodos(readContract));
+        updateDisplayAccountData();
+        e.target.reset();
+      }
+    } else {
+      alert('The form field cannot be empty!');
     }
   };
 
-  // Todo Delete Handler =============================================
+  // ****************************************************************
+  // Todo Delete Handler
+  // ****************************************************************
   const deleteHandler = async (e, id) => {
     e.preventDefault();
-    console.log('delete this:', id);
     if (await removeTodo(writeContract, id)) {
       setTodos(await getTodos(readContract));
+      updateDisplayAccountData();
     }
   };
 
-  // Todo Checkbox Handler =============================================
+  // ****************************************************************
+  // Todo Checkbox Handler
+  // ****************************************************************
   const checkboxHandler = async (id) => {
-    console.log('update this', id);
     if (await updateTodoStatus(writeContract, id)) {
       setTodos(await getTodos(readContract));
+      updateDisplayAccountData();
     }
   };
 
   return (
-    <div>
+    <div className="todo-block">
       <h1>Todo Block</h1>
       <BlockWalletInfo wallet={wallet} />
       <TodoForm todoFormHandler={todoFormHandler} />

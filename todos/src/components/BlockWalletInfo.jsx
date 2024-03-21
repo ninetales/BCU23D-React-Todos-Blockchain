@@ -3,7 +3,9 @@ import React from 'react';
 export const BlockWalletInfo = ({ wallet }) => {
   return (
     <div className="wallet-balance-container">
-      <div>Block Wallet Info</div>
+      <div className="wallet-balance-title">
+        <span>Block Wallet Info</span>
+      </div>
       <ul>
         {wallet.accounts[0] && (
           <>

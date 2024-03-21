@@ -2,9 +2,8 @@ import React from 'react';
 import { TodoItem } from './TodoItem';
 
 export const TodoList = ({ todos, deleteHandler, checkboxHandler }) => {
-  console.log('The Todo List Component:', todos);
   return (
-    <ul>
+    <ul className="todo-list">
       {todos.map((todo, index) => {
         return (
           <TodoItem
