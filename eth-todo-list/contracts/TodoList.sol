@@ -38,5 +38,6 @@ contract TodoList {
 
     constructor() public {
         createTodo("Hello world");
+        createTodo("Does this work?");
     }
 }
