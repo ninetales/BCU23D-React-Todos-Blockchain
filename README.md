@@ -2,6 +2,6 @@
 
 # Todos
 
-A school project where we worked on creating a to-do list using React and blockchain. Using both Metamask and Ganache, we store the data on a blockchain.
+An academic project where we worked on creating a to-do list using React and blockchain. Using both Metamask and Ganache, we store the data on a blockchain.
 
 !['App'](./todo-block.png)
